@@ -29,7 +29,7 @@ Layout/ExtraSpacing:
 # special_inside_parentheses (default) と比べて
 # * 横に長くなりづらい
 # * メソッド名の長さが変わったときに diff が少ない
-Layout/IndentFirstArrayElements:
+Layout/IndentFirstArrayElement:
   EnforcedStyle: consistent
 
 # ({ と hash を開始した場合に ( の位置にインデントさせる
@@ -162,14 +162,6 @@ Naming/PredicateName:
 # 変数 s にどんな文字列かを形容したい場合と、不要な場合とがある＝無効
 Naming/UncommunicativeMethodParamName:
   Enabled: false
-
-#################### Performance ###########################
-
-# downcase or upcase しての比較はイディオムの域なので、多少の
-# パフォーマンスの違いがあろうが casecmp に変える意義を感じない
-Performance/Casecmp:
-  Enabled: false
-
 
 #################### Security ##############################
 
