@@ -19,7 +19,7 @@ module QiitaClone
       g.template_engine false
       g.javascripts false
       g.stylesheets false
-      g.helper true
+      g.helper false
       g.test_framework :rspec,
                        view_specs: false,
                        routing_specs: false,
