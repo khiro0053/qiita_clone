@@ -27,7 +27,6 @@ module QiitaClone
                        controller_specs: false,
                        request_specs: true
     end
+    config.api_only = true
   end
 end
-
-config.api_only = true
