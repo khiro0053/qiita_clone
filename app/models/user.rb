@@ -9,9 +9,10 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates :name, presence: true, length: { in: 2..50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  validates :email, format: { with: VALID_EMAIL_REGEX }
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]+\z/.freeze
+  # emailのフォーマットについてはdevice-token-auth側で/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/iと設定されている
+  validates :email, presence: true, uniqueness: true
+  # 半角英小文字大文字数字をそれぞれ1種類以上含む半角英数字記号
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[!-~]+\z/.freeze
   validates :password, presence: true, length: { in: 8..32 }, format: { with: VALID_PASSWORD_REGEX }
 
   has_many :articles, dependent: :destroy
