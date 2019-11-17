@@ -15,6 +15,7 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, title: nil) }
       it "記事が作成できない" do
         expect(article).not_to be_valid
+        expect(article.errors.messages[:title]).to include "can't be blank"
       end
     end
 
@@ -22,6 +23,7 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, title: Faker::Lorem.characters(number: 51)) }
       it "記事が作成できない" do
         expect(article).not_to be_valid
+        expect(article.errors.messages[:title]).to include "is too long (maximum is 50 characters)"
       end
     end
 
@@ -29,6 +31,7 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, body: nil) }
       it "記事が作成できない" do
         expect(article).not_to be_valid
+        expect(article.errors.messages[:body]).to include "can't be blank"
       end
     end
   end

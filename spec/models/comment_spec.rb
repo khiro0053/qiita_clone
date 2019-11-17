@@ -15,6 +15,7 @@ RSpec.describe Comment, type: :model do
       let(:comment) { build(:comment, body: nil) }
       it "コメント投稿できない" do
         expect(comment).not_to be_valid
+        expect(comment.errors.messages[:body]).to include "can't be blank"
       end
     end
   end
