@@ -20,6 +20,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   end
 
   private
+
     def set_article
       @article = Article.find(params[:id])
     end
