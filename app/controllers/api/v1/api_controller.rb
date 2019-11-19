@@ -1,3 +1,3 @@
-class Api::V1::ApplicationController < ActionController::Base
+class Api::V1::ApiController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
 end
