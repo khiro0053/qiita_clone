@@ -1,21 +1,21 @@
 version: 2.1
+
 executors:
   default_container:
     docker:
-    - image: circleci/ruby:2.6.2-stretch
-      environment:
-        RAILS_ENV: test
-        BUNDLE_JOBS: 4
-        BUNDLE_RETRY: 3
-        BUNDLE_PATH: vendor/bundle
-        BUNDLER_VERSION: 2.0.1
+      - image: circleci/ruby:2.6.2-stretch
+        environment:
+          RAILS_ENV: test
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.0.1
 
-    - image: circleci/mysql:latest
-      command: mysqld --default-authentication-plugin=mysql_native_password
-      environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: true
+      - image: circleci/mysql:latest
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
     working_directory: ~/qiita_clone
-
 
 commands:
   install_bundler:
@@ -23,17 +23,16 @@ commands:
     steps:
       - run: gem install bundler -v 2.0.1
 
-
 jobs:
   fetch_source_code:
     executor:
       name: default_container
-  steps:
-    - checkout
-    - save_cache:
-        key: v1-qiita_clone-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - ~/qiita_clone
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-qiita_clone-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/qiita_clone
 
   bundle_dependencies:
     executor:
@@ -43,6 +42,7 @@ jobs:
           key: v1-qiita_clone-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
       - run:
           name: setup bundler
           command: |
@@ -54,7 +54,6 @@ jobs:
           name: Bundle Install Dependencies
           command: |
             bundle install
-
       - save_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
