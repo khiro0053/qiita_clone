@@ -11,6 +11,8 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   end
 
   def create
+    article = current_user.articles.create!(article_params)
+    render json: article
   end
 
   def update
@@ -20,6 +22,9 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   end
 
   private
+    def article_params
+      params.require(:article).permit(:title, :body)
+    end
 
     def set_article
       @article = Article.find(params[:id])
