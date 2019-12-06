@@ -44,6 +44,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
     let(:params) { { article: attributes_for(:article) } }
     let(:current_user) { create(:user) }
+
     before { allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user) }
 
     it "指定した記事が取得できる" do
