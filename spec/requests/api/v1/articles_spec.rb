@@ -48,7 +48,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
     before { allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user) }
 
     it "指定した記事が取得できる" do
-      expect { subject }.to change { Article.count }.by(1)
+      expect { subject }.to change { Article.where(user_id: current_user.id).count }.by(1)
       expect(response).to have_http_status(:ok)
     end
   end
