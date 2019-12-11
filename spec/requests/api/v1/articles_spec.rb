@@ -53,7 +53,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
     end
   end
 
-  describe "PATCH /api/v1/articles:id" do
+  describe "PATCH /api/v1/articles/:id" do
     subject { patch(api_v1_article_path(article_id), params: params) }
 
     let(:params) { { article: attributes_for(:article) } }
@@ -81,7 +81,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
     end
   end
 
-  describe "DELETE /api/v1/articles:id" do
+  describe "DELETE /api/v1/articles/:id" do
     subject { delete(api_v1_article_path(article_id), params: params) }
 
     before { allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user) }
