@@ -40,12 +40,11 @@ RSpec.describe "Api::V1::Articles", type: :request do
   end
 
   describe "POST /api/v1/articles" do
-    subject { post(api_v1_articles_path, params: params, headers: headers ) }
+    subject { post(api_v1_articles_path, params: params, headers: headers) }
 
     let(:params) { { article: attributes_for(:article) } }
     let(:current_user) { create(:user) }
-    let(:headers) {current_user.create_new_auth_token}
-
+    let(:headers) { current_user.create_new_auth_token }
 
     it "current_userに紐付いた記事が作成できる" do
       expect { subject }.to change { current_user.articles.count }.by(1)
@@ -59,7 +58,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
     let(:params) { { article: attributes_for(:article) } }
     let(:current_user) { create(:user) }
     let(:article) { create(:article, user: current_user) }
-    let(:headers) {current_user.create_new_auth_token}
+    let(:headers) { current_user.create_new_auth_token }
 
     context "自身が作成した記事を更新する場合" do
       let(:article_id) { article.id }
@@ -85,9 +84,8 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
     let(:params) { { article: attributes_for(:article) } }
     let(:current_user) { create(:user) }
-    let(:headers) {current_user.create_new_auth_token}
+    let(:headers) { current_user.create_new_auth_token }
     let!(:article) { create(:article, user: current_user) }
-
 
     context "自身が作成した記事を削除する場合" do
       let(:article_id) { article.id }
