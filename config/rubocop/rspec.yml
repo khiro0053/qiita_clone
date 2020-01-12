@@ -41,14 +41,11 @@ RSpec/ImplicitExpect:
 RSpec/InstanceVariable:
   Enabled: false
 
-# spec_helper で meta[:aggregate_failures] を設定することで
-# aggregate_failures が全ての spec で有効になる。
-#
-# ほぼ MultipleExpectations についてはチェックされなくなる設定なので注意。
+#  MultipleExpectations についてはチェックされなくなる設定なので注意。
 # パフォーマンスの問題さえ無ければ 1 example 1 assertion にしておく方が
 # 読みやすいテストになりやすいので、そこはレビューで担保していく必要がある。
 RSpec/MultipleExpectations:
-  Max: 4
+  Enabled: false
 
 # 変に名前つけて呼ぶ方が分かりづらい。
 # テスト対象メソッドを呼ぶだけの subject 以外を書かないようにする方が効く。
@@ -71,4 +68,7 @@ RSpec/NestedGroups:
 # ブロックは初見だと返り値を書いていると気づけないので and_return にしたいが、
 # ブロックの方が見た目がスッキリして見やすいので、どちらでもお好きにどうぞ。
 RSpec/ReturnFromStub:
+  Enabled: false
+
+RSpec/LetSetup:
   Enabled: false
