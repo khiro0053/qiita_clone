@@ -5,7 +5,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
     subject { post(api_v1_user_session_path, params: params) }
 
     context "登録済みの正しいユーザー情報を送った場合" do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       let(:params) { attributes_for(:user, email: user.email, password: user.password) }
 
       it "ログインできる" do
@@ -18,7 +18,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
     end
 
     context "emailが一致しない場合" do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       let(:params) { attributes_for(:user, password: user.password) }
 
       it "ログインできない" do
@@ -33,7 +33,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
     end
 
     context "passwordが一致しない場合" do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       let(:params) { attributes_for(:user, email: user.email) }
 
       it "ログインできない" do
