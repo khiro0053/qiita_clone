@@ -1,7 +1,7 @@
 <template>
   <v-toolbar dark color="#55c500">
     <router-link to="/" class="header-link">
-    <v-toolbar-title class="white--text font-weight-bold">Qiita</v-toolbar-title>
+      <v-toolbar-title class="white--text font-weight-bold">Qiita</v-toolbar-title>
     </router-link>
 
     <!-- <v-btn icon>
@@ -10,13 +10,7 @@
 
     <v-spacer></v-spacer>
 
-    <router-link to="/sign_up" class="header-link">
-      v-btn flat class="register font-weight-bold">ユーザー登録</v-btn>
-    </router-link>
-    <router-link to="/" class="header-link">
-      <v-btn flat class="font-weight-bold">ログイン</v-btn>
-    </router-link>
-        <div v-if="isLoggedIn">
+    <div v-if="isLoggedIn">
       <router-link to="/articles/new" class="header-link">
         <v-btn flat class="post font-weight-bold">投稿する</v-btn>
       </router-link>
@@ -26,7 +20,7 @@
       <router-link to="/sign_up" class="header-link">
         <v-btn flat class="register font-weight-bold">ユーザー登録</v-btn>
       </router-link>
-      <router-link to="/" class="header-link">
+      <router-link to="/sign_in" class="header-link">
         <v-btn flat class="font-weight-bold">ログイン</v-btn>
       </router-link>
     </div>
