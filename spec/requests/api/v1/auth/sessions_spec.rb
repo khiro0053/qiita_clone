@@ -48,7 +48,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
     end
   end
 
-  describe "DELETE /api/v1/auth/sign_in" do
+  describe "DELETE /api/v1/auth/sign_out" do
     subject { delete(destroy_api_v1_user_session_path, headers: headers) }
 
     context "ログアウトするための正しいユーザー情報を送った場合" do
