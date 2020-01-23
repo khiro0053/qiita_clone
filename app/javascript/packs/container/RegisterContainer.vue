@@ -39,7 +39,6 @@ import axios from "axios";
 import { Vue, Component } from "vue-property-decorator";
 import VeeValidate from "vee-validate";
 import Router from "../router/router";
-
 Vue.use(VeeValidate, { locale: "ja" });
 @Component
 export default class RegisterContainer extends Vue {
@@ -61,14 +60,11 @@ export default class RegisterContainer extends Vue {
       };
     };
   };
-
   mounted() {
     this.$validator.localize("ja", this.dictionary);
   }
-
   async submit(): Promise<void> {
     // this.$validator.validateAll();
-
     const params = {
       name: this.name,
       email: this.email,
