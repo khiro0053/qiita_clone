@@ -28,11 +28,12 @@
 <script lang="ts">
 import axios from "axios";
 import { Vue, Component } from "vue-property-decorator";
-import VeeValidate from "vee-validate";
+import * as VeeValidate from "vee-validate";
 import Router from "../router/router";
 Vue.use(VeeValidate, { locale: "ja" });
 @Component
 export default class RegisterContainer extends Vue {
+  [x: string]: any;
   $_veeValidate: {
     validator: "new";
   };
