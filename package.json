@@ -4,6 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "^4.0.7",
     "axios": "^0.19.0",
+    "highlight.js": "^9.15.8",
+    "marked": "^0.6.2",
     "ts-loader": "^6.0.3",
     "typescript": "^3.5.2",
     "vee-validate": "^2.2.11",
@@ -12,9 +14,11 @@
     "vue-property-decorator": "^8.2.1",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.10",
+    "vue2-timeago": "^1.2.2",
     "vuetify": "^1.5.16"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "webpack-dev-server": "^3.7.2"
   }
 }
