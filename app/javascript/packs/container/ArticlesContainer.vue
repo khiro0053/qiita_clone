@@ -1,15 +1,31 @@
 <template>
-  <v-container v-model="article" class="item elevation-3 article-container">
-    <v-layout xs-12 class="top-info-container">
-      <span class="user-name">@{{ article.user.name }}</span>
-      <time-ago :refresh="60" :datetime="article.updated_at" locale="en" tooltip="top" long></time-ago>
-    </v-layout>
-    <v-layout>
-      <h1 class="article-title">{{ article.title }}</h1>
-    </v-layout>
-    <v-layout class="article-body-container">
-      <div id="article-body">{{ article.body }}</div>
-    </v-layout>
+  <v-container class="item elevation-3 articles-container">
+    <v-list two-line>
+      <template v-for="(article, index) in articles">
+        <v-list-tile :key="article.title" avatar>
+          <v-list-tile-avatar>
+            <img :src="article.avatar">
+          </v-list-tile-avatar>
+
+          <v-list-tile-content>
+            <v-list-tile-title class="article-title">
+              <router-link :to="{ name: 'article', params: { id: article.id }}">{{ article.title }}</router-link>
+            </v-list-tile-title>
+            <v-list-tile-sub-title>
+              by {{ article.user.name }}
+              <time-ago
+                :refresh="60"
+                :datetime="article.updated_at"
+                locale="en"
+                tooltip="right"
+                long
+              ></time-ago>
+            </v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider :key="index"></v-divider>
+      </template>
+    </v-list>
   </v-container>
 </template>
 
@@ -22,41 +38,36 @@ import TimeAgo from "vue2-timeago";
     TimeAgo
   }
 })
-export default class ArticleContainer extends Vue {
-  article: any = "";
+export default class ArticlesContainer extends Vue {
+  articles: string[] = [];
   async mounted(): Promise<void> {
-    await this.fetchArticle(this.$route.params.id);
+    await this.fetchArticles();
   }
-  async fetchArticle(id: string): Promise<void> {
-    await axios
-      .get(`/api/v1/articles/${id}`)
-      .then(response => {
-        this.article = response.data;
-      })
-      .catch(e => {
-        // TODO: 適切な Error 表示
-        alert(e.response.statusText);
+  async fetchArticles(): Promise<void> {
+    await axios.get("/api/v1/articles").then(response => {
+      response.data.map((article: any) => {
+        this.articles.push(article);
       });
+    });
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.top-info-container {
-  margin-bottom: 1em;
-}
-.article-container {
-  margin: 2em;
-}
-.article-title {
-  font-size: 2.5em;
-  line-height: 1.4;
-}
-.article-body-container {
-  margin: 2em 0;
-  font-size: 16px;
-}
-.user-name {
-  margin-right: 1em
+.articles-container {
+  margin-top: 2em;
+  .article-title {
+    a {
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #777;
+    }
+  }
 }
 </style>
