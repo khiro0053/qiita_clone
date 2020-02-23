@@ -6,7 +6,6 @@ import RegisterContainer from "../container/RegisterContainer.vue";
 import LoginContainer from "../container/LoginContainer.vue";
 import EditArticleContainer from "../container/EditArticleContainer.vue";
 
-
 Vue.use(VueRouter);
 
 export default new VueRouter({
