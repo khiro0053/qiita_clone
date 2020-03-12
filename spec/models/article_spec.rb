@@ -9,6 +9,7 @@ RSpec.describe Article, type: :model do
         expect(article.status).to eq "draft"
       end
     end
+
     context "titleとbodyが入力されていてstatusは下書きの場合" do
       let(:article) { build(:article, :draft) }
       it "下書き状態の記事を作成できる" do
@@ -16,6 +17,7 @@ RSpec.describe Article, type: :model do
         expect(article.status).to eq "draft"
       end
     end
+
     context "titleとbodyが入力されていてstatusは公開状態の場合" do
       let(:article) { build(:article, :published) }
       it "公開状態の記事を作成できる" do
@@ -56,12 +58,14 @@ RSpec.describe Article, type: :model do
       create_list(:article, 2, :draft)
       create_list(:article, 3, :published)
     end
+
     context "下書きの記事だけを取得する場合" do
       it "下書きの記事のみを取得できる" do
         expect(Article.draft.count).to eq 2
         expect(Article.draft[0].status).to eq "draft"
       end
     end
+
     context "公開の記事だけを取得する場合" do
       it "公開の記事のみを取得できる" do
         expect(Article.published.count).to eq 3
