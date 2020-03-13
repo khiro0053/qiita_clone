@@ -3,12 +3,12 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
-    articles = Article.all
+    articles = Article.published
     render json: articles
   end
 
   def show
-    article = Article.find(params[:id])
+    article = Article.published.find(params[:id])
     render json: article
   end
 
@@ -30,7 +30,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   private
 
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :status)
     end
 
     def current_user_set_article
