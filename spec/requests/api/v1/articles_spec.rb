@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
       subject
       res = JSON.parse(response.body)
       expect(res.length).to eq Article.published.count
-      expect(res[0].keys).to eq ["id", "title", "body", "updated_at",  "status", "user"]
+      expect(res[0].keys).to eq ["id", "title", "body", "updated_at", "status", "user"]
       expect(response).to have_http_status(:ok)
     end
   end
@@ -42,6 +42,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
+
     context "指定したidの記事が下書き状態だった場合" do
       let(:article) { create(:article, :draft) }
       let(:article_id) { article.id }
@@ -53,22 +54,22 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
   describe "POST /api/v1/articles" do
     subject { post(api_v1_articles_path, params: params, headers: headers) }
-    context "公開状態の記事を作成した場合" do
 
-    let(:params) { { article: attributes_for(:article, :published) } }
-    let(:current_user) { create(:user) }
-    let(:headers) { current_user.create_new_auth_token }
+    context "公開状態の記事を作成した場合" do
+      let(:params) { { article: attributes_for(:article, :published) } }
+      let(:current_user) { create(:user) }
+      let(:headers) { current_user.create_new_auth_token }
 
       it "current_userに紐付いた公開記事が作成できる" do
         expect { subject }.to change { current_user.articles.published.count }.by(1)
         expect(response).to have_http_status(:ok)
       end
     end
-    context "下書きの記事を作成した場合" do
 
-    let(:params) { { article: attributes_for(:article, :draft) } }
-    let(:current_user) { create(:user) }
-    let(:headers) { current_user.create_new_auth_token }
+    context "下書きの記事を作成した場合" do
+      let(:params) { { article: attributes_for(:article, :draft) } }
+      let(:current_user) { create(:user) }
+      let(:headers) { current_user.create_new_auth_token }
 
       it "current_userに紐付いた下書き記事が作成できる" do
         expect { subject }.to change { current_user.articles.draft.count }.by(1)
@@ -92,7 +93,6 @@ RSpec.describe "Api::V1::Articles", type: :request do
                               change { Article.find(article_id).body }.from(article.body).to(params[:article][:body]) &
                               change { Article.find(article_id).status }.from(article.status).to(params[:article][:status]) &
                               not_change { Article.find(article_id).created_at }
-        binding.pry
         expect(response).to have_http_status(:ok)
       end
     end
