@@ -1,17 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Current::Articles", type: :request do
   describe "GET /api/v1/current/articles" do
-    subject {get(api_v1_current_articles_path, headers: headers)}
+    subject { get(api_v1_current_articles_path, headers: headers) }
 
-    let(:current_user){create(:user)}
+    let(:current_user) { create(:user) }
     let!(:article1) { create(:article, :draft, user: current_user) }
     let!(:article2) { create(:article, :published, user: current_user) }
     let!(:article3) { create(:article, :published) }
     let!(:article4) { create(:article, :draft) }
 
     context "ログイン時の場合" do
-      let(:headers){ current_user.create_new_auth_token}
+      let(:headers) { current_user.create_new_auth_token }
       it "自分の書いた公開記事一覧が取得できる" do
         subject
         res = JSON.parse(response.body)
