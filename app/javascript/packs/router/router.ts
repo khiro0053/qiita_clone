@@ -6,6 +6,7 @@ import RegisterContainer from "../container/RegisterContainer.vue";
 import LoginContainer from "../container/LoginContainer.vue";
 import EditArticleContainer from "../container/EditArticleContainer.vue";
 
+
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -15,6 +16,7 @@ export default new VueRouter({
     { path: "/sign_up", component: RegisterContainer },
     { path: "/sign_in", component: LoginContainer },
     { path: "/articles/new", component: EditArticleContainer },
+    { path: "/articles/:id/edit", component: EditArticleContainer },
     { path: "/articles/:id", component: ArticleContainer, name: "article" }
   ]
 });
