@@ -20,8 +20,8 @@
         class="font-weight-bold white--text"
       >Qiitaに投稿</v-btn>
       <v-btn
-        @click="createOrUpdateArticle('drafttt')"
-        color="#55c500"ssy
+        @click="createOrUpdateArticle('draft')"
+        color="#55c500"
         class="font-weight-bold white--text"
       >下書き投稿</v-btn>
     </div>
@@ -34,7 +34,6 @@ import { Vue, Component } from "vue-property-decorator";
 import Router from "../router/router";
 import marked from "marked";
 import hljs from "highlight.js";
-
 const headers = {
   headers: {
     Authorization: "Bearer",
@@ -49,17 +48,13 @@ export default class ArticlesContainer extends Vue {
   id: string = "";
   title: string = "";
   body: string = "";
-
   async mounted(): Promise<void> {
     // only update
     if (this.$route.params.id) {
       await this.fetchArticle(this.$route.params.id);
     }
   }
-
-
   async created(): Promise<void> {
-    // Add 'hljs' class to code tag
     const renderer = new marked.Renderer();
     let data = "";
     renderer.code = function(code, lang) {
@@ -69,7 +64,6 @@ export default class ArticlesContainer extends Vue {
       } catch (e) {
         data = hljs.highlightAuto(code).value;
       }
-
       return `<pre><code class="hljs"> ${data} </code></pre>`;
     };
     marked.setOptions({
@@ -84,8 +78,6 @@ export default class ArticlesContainer extends Vue {
       return marked(text);
     };
   }
-
-
   async fetchArticle(id: string): Promise<void> {
     await axios
       .get(`/api/v1/articles/${id}`)
@@ -104,7 +96,6 @@ export default class ArticlesContainer extends Vue {
       "draft" = "draft",
       "published" = "published"
     }
-
     const params = {
       title: this.title,
       body: this.body,
@@ -115,8 +106,11 @@ export default class ArticlesContainer extends Vue {
       await axios
         .patch(`/api/v1/articles/${this.id}`, params, headers)
         .then(_response => {
-          // TODO: 下書きの場合は下書き一覧ページに飛ばす
-          Router.push("/");
+          if (status == Statuses["published"]) {
+            Router.push("/");
+          } else {
+            Router.push("/articles/drafts");
+          }
         })
         .catch(e => {
           // TODO: 適切な Error 表示
@@ -127,8 +121,11 @@ export default class ArticlesContainer extends Vue {
       await axios
         .post("/api/v1/articles", params, headers)
         .then(_response => {
-          // TODO: 下書きの場合は下書き一覧ページに飛ばす
-          Router.push("/");
+          if (status == Statuses["published"]) {
+            Router.push("/");
+          } else {
+            Router.push("/articles/drafts");
+          }
         })
         .catch(e => {
           // TODO: 適切な Error 表示
@@ -149,7 +146,6 @@ export default class ArticlesContainer extends Vue {
 .title-form {
   flex: none;
 }
-
 .edit-area {
   height: 100%;
   display: flex;
@@ -164,7 +160,6 @@ export default class ArticlesContainer extends Vue {
   border-left: none;
   overflow: auto;
 }
-
 </style>
 
 <style lang="scss">
