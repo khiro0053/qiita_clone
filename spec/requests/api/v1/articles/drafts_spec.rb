@@ -16,7 +16,8 @@ RSpec.describe "Api::V1::Articles::Drafts", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.length).to eq current_user.articles.draft.count
-        expect(res[0].keys).to eq ["id", "title", "body", "updated_at", "status", "user"]
+        expect(res[0].keys).to eq ["id", "title", "updated_at", "user"]
+        expect(res[0]["user"].keys).to eq ["id", "name", "email"]
         expect(response).to have_http_status(:ok)
       end
     end
