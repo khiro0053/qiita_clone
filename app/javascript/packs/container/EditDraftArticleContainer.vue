@@ -44,12 +44,11 @@ const headers = {
   }
 };
 @Component
-export default class ArticlesContainer extends Vue {
+export default class EditDraftArticleContainer extends Vue {
   id: string = "";
   title: string = "";
   body: string = "";
   async mounted(): Promise<void> {
-    // only update
     if (this.$route.params.id) {
       await this.fetchArticle(this.$route.params.id);
     }
@@ -80,7 +79,7 @@ export default class ArticlesContainer extends Vue {
   }
   async fetchArticle(id: string): Promise<void> {
     await axios
-      .get(`/api/v1/articles/${id}`)
+      .get(`/api/v1/articles/drafts/${id}`, headers)
       .then(response => {
         this.id = response.data.id;
         this.title = response.data.title;
