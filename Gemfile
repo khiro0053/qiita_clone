@@ -6,7 +6,7 @@ ruby "2.6.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.3"
 
-gem "mysql2", "~> 0.5.2"
+
 
 # Use Puma as the app server
 gem "puma", "~> 3.11"
@@ -55,7 +55,13 @@ group :development, :test do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "therubyracer"
+  gem "mysql2", ">= 0.4.4", "< 0.6.0"
 end
+
+group :production do
+  gem "pg"
+end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
