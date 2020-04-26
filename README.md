@@ -4,7 +4,9 @@ Qiitaのクローンアプリです。
 APIはRails, フロントはVueで作成しました。（フロントは自分で実装してはおりません。）  
 テストフレームワークにはRspecを使用し、CircleCIでのテスト自動化を行っております。  
 データベースはDockerのMySQLコンテナを使用しています。   
-ログイン、ログアウト機能の実装にはdevise-token-authを使用しました。
+ログイン、ログアウト機能の実装にはdevise-token-authを使用しました。  
+デプロイにはherokuを使用しております。  
+https://protected-springs-12591.herokuapp.com/
 
 
 # 機能一覧
