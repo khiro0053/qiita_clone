@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version 2.6.2
+vue version 2.6.10
+Docker
+Rspec
+Description
 
-Things you may want to cover:
+機能一覧
+ユーザー登録、ログイン、ログアウト機能
+下書き投稿、本番公開投稿(Markdown記法・シンタックスハイライト)
+記事一覧表示
+記事編集、削除
+マイページ一覧表示（本番公開記事のみ）
+下書き一覧表示（自身の記事のみ）
+APIはRails, フロントはVueで作成しました。
 
-* Ruby version
+＊　フロントは教材のサンプルコードをコピーしているため、自分で実装はしておりません。
 
-* System dependencies
+Rspecによる、model,APIのテストを実装しております。 Dockerをとりいれました 
 
-* Configuration
+ログイン、ログアウト機能の実装にはdevise-token-authを導入し、公式ドキュメント等を参考にして、実装しました。
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+herokuへのデプロイも行いました。 https://qiita-qlone-stg.herokuapp.com/
