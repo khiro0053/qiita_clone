@@ -18,7 +18,6 @@ https://protected-springs-12591.herokuapp.com/
 - 下書き一覧表示（自身の記事のみ）
 
 
-herokuへのデプロイも行いました。
 # 使用技術一覧
 - Ruby version 2.6.2
 - vue version 2.6.1
